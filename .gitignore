@@ -1,0 +1,6 @@
+pimsvm/
+__pycache__
+*.pyc
+*.log
+*.sqlite3
+*.txt
