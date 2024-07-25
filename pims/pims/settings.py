@@ -77,9 +77,18 @@ WSGI_APPLICATION = 'pims.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tomato',
+        'USER': 'tomato',
+        'PASSWORD': 'tomato',
+        'HOST': '127.0.0.1',
+        # 'HOST': '43.24.188.114',
+        'PORT': '5432',       # the default PostgreSQL port
+        'OPTIONS': {
+            # specify the custom schema(s) here
+            'options': '-c search_path=tomato',
+        },
+    },
 }
 
 
