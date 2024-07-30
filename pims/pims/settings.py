@@ -11,9 +11,21 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+from dotenv import load_dotenv
+import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Initialize environment variables
+env = environ.Env()
+
+# Reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+load_dotenv
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +37,7 @@ SECRET_KEY = 'django-insecure-smhwokz(2eb^v9j=%m=pq^g2v_5(3=p9g9syafct3+-lr@y(xr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -78,16 +90,11 @@ WSGI_APPLICATION = 'pims.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tomato',
-        'USER': 'tomato',
-        'PASSWORD': 'tomato',
-        'HOST': '127.0.0.1',
-        # 'HOST': '43.24.188.114',
-        'PORT': '5432',       # the default PostgreSQL port
-        'OPTIONS': {
-            # specify the custom schema(s) here
-            'options': '-c search_path=tomato',
-        },
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PWD"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT"),
     },
 }
 
