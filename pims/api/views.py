@@ -63,3 +63,8 @@ class PotatoPostList(APIView):
 
         serializer = PotatoPostSerializer(potato_posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ItemListCreate(generics.ListCreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
